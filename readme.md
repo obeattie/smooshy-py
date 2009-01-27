@@ -28,3 +28,7 @@ Finally, you can, of course use the functions and classes provided by smoosher.p
 
 # Credit where credit's due…
 This script is essentially a Python port of [smusher](http://github.com/grosser/smusher/tree/master) -- I'm a Python guy so I hope you'll forgive me for making my own version :)
+
+* * *
+
+As with [smusher](http://github.com/grosser/smusher/tree/master), consider this code in the public domain, do whatever the hell you want with it (fork away :) but don't blame me for any mess caused by it.
