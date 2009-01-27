@@ -155,8 +155,7 @@ def recursive_smoosher(root):
 
 if __name__ == '__main__':
     parser = optparse.OptionParser()
-    parser.add_option('-r', '--root', dest='root', metavar='DIR', \
-                      help='Smoosh all files in DIR', default=os.getcwd())
+    parser.add_option('-s', '--smoosh', dest='root', default=os.getcwd())
     (options, args) = parser.parse_args()
     
     if os.path.isdir(options.root):
