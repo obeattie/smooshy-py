@@ -1,5 +1,5 @@
 from __future__ import with_statement # Yes, yes, I know...
-import decimal, fcntl, optparse, os, shutil, simplejson, sys, urllib2, urlparse
+import decimal, fcntl, os, shutil, simplejson, sys, urllib2, urlparse
 
 try:
     from cStringIO import StringIO
@@ -67,8 +67,6 @@ class Smoosher(object):
         response = opener.open('http://smush.it/ws.php', {
             'files': self.original,
         }).read()
-        
-        print response
         response = simplejson.loads(response)
         
         # If smush.it reported an error, raise it
@@ -128,23 +126,33 @@ class Smoosher(object):
                     # os.remove(replacement.name)
                     print '  FAIL: Smooshed file not smaller. Backup restored.'
                 else:
+                    print '  FAIL: Smooshing error. Backup restored.'
                     raise
         
         return (original_size, bytes_saved)
 
-def recursive_smoosher(root):
+def recursive_smoosher(roots):
     """Recursively smooshes its way through a directory of files."""
     files_processed = 0
     total_originals = 0
     total_saved = 0
     
-    for base, dirs, files in os.walk(root):
-        for name in files:
-            if name.rsplit('.', 1)[-1].lower() in ACCEPTED_FILE_TYPES:
-                result = Smoosher(os.path.join(base, name)).smoosh()
-                files_processed += 1
-                total_originals += result[0]
-                total_saved += result[1]
+    for root in roots:
+        if os.path.isdir(root):
+            # The root is a directory, so process everything under it
+            for base, dirs, files in os.walk(root):
+                for name in files:
+                    if name.rsplit('.', 1)[-1].lower() in ACCEPTED_FILE_TYPES:
+                        result = Smoosher(os.path.join(base, name)).smoosh()
+                        files_processed += 1
+                        total_originals += result[0]
+                        total_saved += result[1]
+        else:
+            # The root is just a file, so smoosh!
+            result = Smoosher(root).smoosh()
+            files_processed += 1
+            total_originals += result[0]
+            total_saved += result[1]
     
     print '--------------------'
     print 'EPIC WIN: Smooshed %i files, and cut %d%% bulk away (%b bytes)' % (
@@ -153,17 +161,15 @@ def recursive_smoosher(root):
         total_saved
     )
 
-if __name__ == '__main__':
-    parser = optparse.OptionParser()
-    parser.add_option('-s', '--smoosh', dest='root', default=os.getcwd())
-    (options, args) = parser.parse_args()
+def main():
+    args = sys.argv[1:]
     
-    if os.path.isdir(options.root):
-        # If it's a directory then we need to smoosh everything in it
-        recursive_smoosher(options.root)
-    else:
-        # If it's a file, then just smoosh that
-        assert options.root.rsplit('.', 1)[-1].lower() in ACCEPTED_FILE_TYPES
-        Smoosher(options.root).smoosh()
+    if not args:
+        recursive_smoosher(os.getcwd())
     
-    sys.exit()
+    for arg in args:
+        # Ensure all passed paths exist before we do anything
+        assert os.path.exists(arg), u'%s does not exist' % arg
+    
+    recursive_smoosher(args)
+    sys.exit(0)

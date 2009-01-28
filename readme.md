@@ -12,15 +12,28 @@ Smooshy creates backups of all your files while it's sprinkling its pixie dust o
 Also, if the resulting smooshed file is no smaller than the original, it won't be used.
 
 # Usage
-1. `cd` into a directory of your choosing
-2. run `git clone git@github.com:obeattie/smooshy-py.git smooshy`
-3. `cd` into a directory whose contents you'd like to compress
-4. run `python <directory of your choosing>/smooshy/smoosher.py`
-5. Watch the magic happen.
+## Current Directory
+1. `cd <directory of your choice>`
+2. `smooshy`
+3. Watch the magic.
 
-You can also use smoosher.py on a file instead of a directory, or another directory instead of the present working directory. Simply pass the `-s` (or `--smoosh`) argumemt to smoosher.py and it'll love that file/directory instead =)
+## Specific files/directories
+1. `smooshy <as many files or directories as you'd like to smush here>`
+2. Watch the magic.
 
-Finally, you can, of course use the functions and classes provided by smoosher.py directly. But you already knew that.
+## Pythonic
+Of course, you can always use the classes and functions directly (I do this as part of a deployment script):
+
+    >>> from shooshy import smoosher
+    >>> smoosher.Smoosher(<file path).smoosh()
+    ... # Smooshes the file
+    >>> smoosher.recursive_smoosher([<file or directory>... ])
+    ... # Smooshes all files / all files recursively in directories
+
+# Installation
+1. `git clone git@github.com:obeattie/smooshy-py.git smooshy`
+2. `cd smooshy`
+3. `python setup.py install`
 
 ## Dependencies
 * [simplejson](http://pypi.python.org/pypi/simplejson/)
