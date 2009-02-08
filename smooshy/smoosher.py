@@ -155,7 +155,7 @@ def recursive_smoosher(roots):
             total_saved += result[1]
     
     print '--------------------'
-    print 'EPIC WIN: Smooshed %i files, and cut %d%% bulk away (%b bytes)' % (
+    print 'EPIC WIN: Smooshed %i files, and cut %d%% bulk away (%i bytes)' % (
         files_processed,
         saving_percent(total_originals, total_saved),
         total_saved

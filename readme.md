@@ -14,7 +14,7 @@ Also, if the resulting smooshed file is no smaller than the original, it won't b
 # Usage
 ## Current Directory
 1. `cd <directory of your choice>`
-2. `smooshy`
+2. `smooshy .`
 3. Watch the magic.
 
 ## Specific files/directories
