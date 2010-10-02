@@ -24,7 +24,7 @@ Also, if the resulting smooshed file is no smaller than the original, it won't b
 ## Pythonic
 Of course, you can always use the classes and functions directly (I do this as part of a deployment script):
 
-    >>> from shooshy import smoosher
+    >>> from smooshy import smoosher
     >>> smoosher.Smoosher(<file path).smoosh()
     ... # Smooshes the file
     >>> smoosher.recursive_smoosher([<file or directory>... ])
