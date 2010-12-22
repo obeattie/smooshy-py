@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 from __future__ import with_statement # Yes, yes, I know...
 import decimal, fcntl, os, shutil, simplejson, sys, urllib2, urlparse
 
@@ -173,3 +175,6 @@ def main():
     
     recursive_smoosher(args)
     sys.exit(0)
+
+if __name__ == '__main__':
+    main()
