@@ -31,7 +31,7 @@ Of course, you can always use the classes and functions directly (I do this as p
     ... # Smooshes all files / all files recursively in directories
 
 # Installation
-1. `git clone git@github.com:obeattie/smooshy-py.git smooshy`
+1. `git clone  git://github.com/obeattie/smooshy-py.git smooshy`
 2. `cd smooshy`
 3. `python setup.py install`
 
