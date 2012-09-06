@@ -66,7 +66,7 @@ class Smoosher(object):
     def get_smooshed(self):
         """Sends the original file to smoosh.it and returns the resulting data
            as a file-like object (StringIO)."""
-        response = opener.open('http://ws1.adq.ac4.yahoo.com/ysmush.it/ws.php', {
+        response = opener.open('http://www.smushit.com/ysmush.it/ws.php', {
             'files': self.original,
         }).read()
         response = simplejson.loads(response)
